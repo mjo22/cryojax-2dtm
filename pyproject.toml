@@ -1,0 +1,48 @@
+[project]
+name = "cryojax_2dtm"
+version = "0.0.0"
+description = "2D Template Matching in cryoJAX"
+authors = [{ name = "Michael O'Brien", email = "michaelobrien@g.harvard.edu" }]
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["cryojax"]
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.ruff]
+extend-include = ["*.ipynb"]
+lint.fixable = ["I001", "F401"]
+line-length = 90
+lint.ignore = ["E402", "E721", "E731", "E741", "F722"]
+lint.ignore-init-module-imports = true
+lint.select = ["E", "F", "I001"]
+src = ["src"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+extra-standard-library = ["typing_extensions"]
+lines-after-imports = 2
+order-by-type = false
+
+[tool.black]
+line-length = 90
+
+[tool.pyright]
+reportIncompatibleMethodOverride = true
+reportIncompatibleVariableOverride = false  # Incompatible with eqx.AbstractVar
+include = ["cryojax_2dtm", "tests"]
