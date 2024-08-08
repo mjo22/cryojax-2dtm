@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import cryojax.simulator as cxs
+import jax
 import numpy as np
 from cryojax.image import downsample_with_fourier_cropping
 from cryojax.io import read_atoms_from_pdb, write_volume_to_mrc
@@ -14,6 +15,8 @@ from jaxtyping import Float
 from matplotlib import pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
+
+jax.config.update("jax_enable_x64", True)
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format="%(levelname)-6s [%(filename)s:%(lineno)d] %(message)s")
@@ -35,7 +38,7 @@ def build_atom_potential(path_to_mt_pdb: Path) -> cxs.PengAtomicPotential:
     atom_positions, atom_identities, b_factors = read_atoms_from_pdb(
         path_to_mt_pdb,
         get_b_factors=True,
-        center=False,
+        center=True,
         assemble=False,  # TODO: What does this do?
     )
     b_factors = MINIMUM_B_FACTOR + B_FACTOR_SCALE_FACTOR * b_factors
