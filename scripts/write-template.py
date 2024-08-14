@@ -2,13 +2,13 @@
 
 import argparse
 import logging
-import toml
 from pathlib import Path
 from typing import Any
 
 import cryojax.simulator as cxs
 import jax
 import numpy as np
+import toml
 from cryojax.image import downsample_with_fourier_cropping
 from cryojax.io import read_atoms_from_pdb, write_volume_to_mrc
 from jaxtyping import Float

@@ -1,6 +1,5 @@
 import argparse
 import logging
-import toml
 from pathlib import Path
 from typing import Any
 
@@ -9,15 +8,13 @@ import jax
 import jax.numpy as jnp
 import jax.random as jr
 import numpy as np
+import toml
+from cryojax.image import operators as op
+from cryojax.io import read_array_from_mrc
+from cryojax.rotations import convert_quaternion_to_euler_angles, SO3
 from jaxtyping import Array, Float, PRNGKeyArray
 from matplotlib import pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-
-from cryojax.image import operators as op
-from cryojax.inference import run_grid_search
-from cryojax.io import read_array_from_mrc
-from cryojax.rotations import convert_quaternion_to_euler_angles, SO3
-from cryojax_2dtm import ScaledMinimumSearchMethod
 
 
 logger = logging.getLogger(__name__)
